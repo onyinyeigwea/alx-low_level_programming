@@ -3,19 +3,17 @@
 /**
  * main - Entry point
  *
- * Return: Always 0
+ *
+ * Return: Always 0 (Sucess)
  */
 
 int main(void)
 {
-	char i;
+	char c;
 
-	for
-		(i = 'a';
-		 c <= 'z';
-		 i++);
+	for (c = 'a' ; c <= 'z' ; c++)
 	{
-		putchar(i);
+		putchar(c);
 	}
 	putchar('\n');
 	return (0);
