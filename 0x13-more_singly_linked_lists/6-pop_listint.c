@@ -13,7 +13,7 @@ int pop_listint(listint_t **head)
 	int n;
 	pop_listint *new;
 
-	if (head == NULL)
+	if (*head == NULL)
 		return (0);
 
 	new = *head;
