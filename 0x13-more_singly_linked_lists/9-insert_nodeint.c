@@ -28,9 +28,9 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		return (touch);
 	}
 
-	for (i = 0; tmp && i < idx; i++)
+	for (z = 0; tmp && z < idx; z++)
 	{
-		if (i == idx - 1)
+		if (z == idx - 1)
 		{
 			touch->next = tmp->next;
 			tmp->next = touch;
