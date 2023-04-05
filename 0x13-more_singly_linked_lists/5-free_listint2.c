@@ -8,13 +8,14 @@
  * Return: void
  */
 
-void free_listint2(listint_t *head)
+void free_listint2(listint_t **head)
 {
-        listint_t *Z;
-        while (head != NULL)
-        {
-        Z = head;
-        head = head->next;
-        free(Z);
-        }
+	listint_t *Z;
+
+	while (head != NULL)
+	{
+	Z = head;
+	head = head->next;
+	free(Z);
+	}
 }
