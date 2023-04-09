@@ -11,12 +11,13 @@
 
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned long int mask = 1 << m, distinct = n ^ m;
+	unsigned long int d = n ^ m;
 	unsigned int count = 0;
 
-	while (distinct)
+	while (d > 0)
 	{
-		count += distinct & 1;
+		count += (d & 1);
+		d >>= 1;
 	}
 	return (count);
 }
