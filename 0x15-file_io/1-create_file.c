@@ -13,21 +13,21 @@
 
 	int create_file(const char *filename, char *text_content)
 {
-	int num, store_fd;
+	FILE *fd;
+	ssize_t len = 0;
 
 
 	if (!filename)
 		return (-1);
-
-	if (text_content == NULL)
-
-	if (store_fd == -1)
+	fd = fopen(filename, "w");
+		if (fd == -1)
 		return (-1);
 
 	if (text_content)
-		numBytes = write(store_fd, text_content, strlen(text_content));
+		len = fwrite(text_content, sizeof(char), strlen(text_content), fd);
 
-	close(store_fd);
+	fclose(fd);
+	chmod(filename, S_IRUSR | S_IWUSR);
 
-	return (numBytes == -1 ? -1 : 1);
+	return (len == 0 ? -1 : 1);
 }
