@@ -11,26 +11,34 @@
  * Return: 0 if its a success otherwise error code
  */
 
+#define BUFFER_SIZE 1024
 int main(int argc, char *argv[])
 {
 	int from_a, to_b;
 	ssize_t read_bytes,
 		written_byte;
-	char buffer[BUFFER_SIZE};
-mode_t mode = S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH;
+	char buffer[BUFFER_SIZE];
+
 
 if (argc != 3)
 {
 	dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 	exit(97);
 }
-	from_a = open(argv[1], o_RDONLY);
+	from_a = open(argv[1], O_RDONLY);
 
 	if (from_a == -1)
 {
-	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-	close(from_a);
-	exit(99);
+	dprintf(STDERR_FILENO, "Error: Can't ed from file %s\n", argv[1]);
+	exit(98);
+
+	to_b =open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (to_b == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Cant write to%s\n", argv[2]);
+		close(from_a);
+		exit(99);
+	}
 }
 	while ((read_bytes = read(from_a, buffer, BUFFER_SIZE)) > 0)
 {
@@ -44,9 +52,10 @@ if (argc != 3)
 		exit(99);
 	}
 }
-	if(read_bytes == -1)
+	if (read_bytes == -1)
 {
-	dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
+	dprintf(STDERR_FILENO, 
+			"Error: can't read from file %s\n", argv[1]);
 	close(from_a);
 	close(to_b);
 	exit(98)
@@ -54,5 +63,16 @@ if (argc != 3)
 
 if (close(from_a) == -1)
 {
-	dprintf(STDERR_FILENO, "Error: Can't close a %d\n",                                                                                                                                                                                           
+	dprintf(STDERR_FILENO, "Error: Can't close a %d\n", from_a);
+	close(to_b);
+	exit(100);
+}
+
+	if (close(to_b) == -1)
+{
+	dprintf(STDERR_FILENO, "Error: Can't close b %d\n", to_b);
+	exit(100);
+}
+	return (0);
+	}
 
